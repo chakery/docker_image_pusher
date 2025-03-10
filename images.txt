@@ -1,2 +1,12 @@
-openjdk:17-jdk-alpine
-zookeeper
+#openjdk:17-jdk-alpine
+zookeeper:3.9.3
+mysql:8.4.4
+mysql:8.0.41
+nginx:1.27.4
+redis:6.2.17
+redis:7.4.2
+mongo:8.0.5
+postgres:14.17
+postgres:15.12
+postgres:16.8
+postgres:17.4
