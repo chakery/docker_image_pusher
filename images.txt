@@ -1,4 +1,7 @@
-nacos/nacos-server:v2.5.1
+canal/canal-server:v1.1.8
+canal/canal-admin:v1.1.8
+
+#nacos/nacos-server:v2.5.1
 
 #openjdk:17-jdk-alpine
 #zookeeper:3.9.3
