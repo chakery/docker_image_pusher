@@ -1,5 +1,6 @@
-jenkins/jenkins:2.503-jdk21
-jenkins/jenkins:2.503-jdk17
+prom/prometheus:v2.53.4
+#jenkins/jenkins:2.503-jdk21
+#jenkins/jenkins:2.503-jdk17
 #canal/canal-server:v1.1.8
 #canal/canal-admin:v1.1.8
 #nacos/nacos-server:v2.5.1
