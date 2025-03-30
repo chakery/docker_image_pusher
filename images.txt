@@ -1,4 +1,5 @@
-prom/prometheus:v2.53.4
+grafana/grafana:11.6.0
+#prom/prometheus:v2.53.4
 #jenkins/jenkins:2.503-jdk21
 #jenkins/jenkins:2.503-jdk17
 #canal/canal-server:v1.1.8
