@@ -1,4 +1,6 @@
-openjdk:17.0.2
+moby/buildkit:buildx-stable-1
+
+#openjdk:17.0.2
 
 #jenkins/jenkins:2.503-jdk21
 #jenkins/jenkins:2.503-jdk17
