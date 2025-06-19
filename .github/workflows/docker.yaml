@@ -58,14 +58,15 @@ jobs:
     - name: Buildx and push image Aliyun
       run: |
         docker login -u $ALIYUN_REGISTRY_USER -p $ALIYUN_REGISTRY_PASSWORD $ALIYUN_REGISTRY
-        docker buildx create --name multiarch-builder --use
         while IFS= read -r line || [ -n "$line" ]; do
             # 忽略空行与注释
             [[ -z "$line" ]] && continue
             if echo "$line" | grep -q '^\s*#'; then
                 continue
             fi
-            bash -c "$line"
+            docker pull --platform all "$line"
+            docker tag "$line" "$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$line"
+            docker push "$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$line"
         done < images2.txt
 
     - name: Build and push image Aliyun
