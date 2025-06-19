@@ -63,7 +63,7 @@ jobs:
             if echo "$line" | grep -q '^\s*#'; then
                 continue
             fi
-            "$line"
+            bash -c "$line"
         done < images2.txt
 
     - name: Build and push image Aliyun
