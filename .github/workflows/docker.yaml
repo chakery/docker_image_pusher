@@ -57,6 +57,8 @@ jobs:
 
     - name: Buildx and push image Aliyun
       run: |
+        docker login -u $ALIYUN_REGISTRY_USER -p $ALIYUN_REGISTRY_PASSWORD $ALIYUN_REGISTRY
+        docker buildx create --name multiarch-builder --use
         while IFS= read -r line || [ -n "$line" ]; do
             # 忽略空行与注释
             [[ -z "$line" ]] && continue
