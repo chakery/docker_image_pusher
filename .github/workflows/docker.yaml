@@ -71,7 +71,7 @@ jobs:
             fi
             image=$(echo "$line" | awk '{print $NF}')
             image_name_tag=$(echo "$image" | awk -F'/' '{print $NF}')
-            echo "开始同步Skopeo: docker://$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$line"
+            echo "开始同步Skopeo: $image_name_tag"
             skopeo copy "docker://docker.io/$line" "docker://$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$image_name_tag" --src-tls-verify=false --dest-tls-verify=false --authfile=${XDG_RUNTIME_DIR}/containers/auth.json
         done < images2.txt
 
