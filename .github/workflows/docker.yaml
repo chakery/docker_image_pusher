@@ -57,16 +57,21 @@ jobs:
 
     - name: Buildx and push image Aliyun
       run: |
-        docker login -u $ALIYUN_REGISTRY_USER -p $ALIYUN_REGISTRY_PASSWORD $ALIYUN_REGISTRY
+        echo "开始使用安装Skopeo"
+        sudo apt-get -y update
+        sudo apt-get -y install skopeo
+        skopeo --version
+        echo "开始登录Skopeo"
+        skopeo login -u $ALIYUN_REGISTRY_USER -p $ALIYUN_REGISTRY_PASSWORD $ALIYUN_REGISTRY
         while IFS= read -r line || [ -n "$line" ]; do
             # 忽略空行与注释
             [[ -z "$line" ]] && continue
             if echo "$line" | grep -q '^\s*#'; then
                 continue
             fi
-            docker pull --platform all "$line"
-            docker tag "$line" "$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$line"
-            docker push "$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$line"
+            bash -c "$line"
+            echo "开始同步Skopeo: docker://$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$line"
+            skopeo copy "docker://docker.io/$line" "docker://$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$line" --src-tls-verify=false --dest-tls-verify=false
         done < images2.txt
 
     - name: Build and push image Aliyun
