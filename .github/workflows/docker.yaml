@@ -62,7 +62,7 @@ jobs:
         sudo apt-get -y install skopeo
         skopeo --version
         echo "开始登录Skopeo"
-        skopeo login -u $ALIYUN_REGISTRY_USER -p $ALIYUN_REGISTRY_PASSWORD $ALIYUN_REGISTRY
+        skopeo login -u $ALIYUN_REGISTRY_USER -p $ALIYUN_REGISTRY_PASSWORD --authfile ${XDG_RUNTIME_DIR}/containers/auth.json $ALIYUN_REGISTRY 
         while IFS= read -r line || [ -n "$line" ]; do
             # 忽略空行与注释
             [[ -z "$line" ]] && continue
@@ -70,7 +70,7 @@ jobs:
                 continue
             fi
             echo "开始同步Skopeo: docker://$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$line"
-            skopeo copy "docker://docker.io/$line" "docker://$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$line" --src-tls-verify=false --dest-tls-verify=false
+            skopeo copy "docker://docker.io/$line" "docker://$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$line" --src-tls-verify=false --dest-tls-verify=false --authfile=${XDG_RUNTIME_DIR}/containers/auth.json
         done < images2.txt
 
     - name: Build and push image Aliyun
