@@ -74,7 +74,7 @@ jobs:
             image_name_tag=$(echo "$image" | awk -F'/' '{print $NF}')
             echo "开始同步Skopeo: $image_name_tag"
             #skopeo copy "docker://docker.io/$line" "docker://$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$image_name_tag" --src-tls-verify=false --dest-tls-verify=false --authfile=${XDG_RUNTIME_DIR}/containers/auth.json
-            skopeo sync --src docker --dest docker "docker.io/library/$line" "$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/"
+            skopeo sync --all --src docker --dest docker "docker.io/$line" "$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/"
         done < images2.txt
 
     - name: Build and push image Aliyun
