@@ -1,2 +1,3 @@
-moby/buildkit:buildx-stable-1
+alpine:3.22.0
+#moby/buildkit:buildx-stable-1
 #tonistiigi/binfmt:qemu-v9.2.2
