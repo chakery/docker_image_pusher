@@ -55,7 +55,7 @@ jobs:
     - name: Docker Setup Buildx
       uses: docker/setup-buildx-action@v3
 
-    - name: Buildx and push image Aliyun
+    - name: Skopeo
       run: |
         echo "开始使用安装Skopeo"
         sudo apt-get -y update
@@ -69,7 +69,6 @@ jobs:
             if echo "$line" | grep -q '^\s*#'; then
                 continue
             fi
-            bash -c "$line"
             echo "开始同步Skopeo: docker://$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$line"
             skopeo copy "docker://docker.io/$line" "docker://$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$line" --src-tls-verify=false --dest-tls-verify=false
         done < images2.txt
