@@ -62,7 +62,8 @@ jobs:
         sudo apt-get -y install skopeo
         skopeo --version
         echo "开始登录Skopeo"
-        skopeo login -u $ALIYUN_REGISTRY_USER -p $ALIYUN_REGISTRY_PASSWORD --authfile ${XDG_RUNTIME_DIR}/containers/auth.json $ALIYUN_REGISTRY 
+        #skopeo login -u $ALIYUN_REGISTRY_USER -p $ALIYUN_REGISTRY_PASSWORD --authfile ${XDG_RUNTIME_DIR}/containers/auth.json $ALIYUN_REGISTRY 
+        skopeo login -u $ALIYUN_REGISTRY_USER -p $ALIYUN_REGISTRY_PASSWORD $ALIYUN_REGISTRY 
         while IFS= read -r line || [ -n "$line" ]; do
             # 忽略空行与注释
             [[ -z "$line" ]] && continue
@@ -72,7 +73,8 @@ jobs:
             image=$(echo "$line" | awk '{print $NF}')
             image_name_tag=$(echo "$image" | awk -F'/' '{print $NF}')
             echo "开始同步Skopeo: $image_name_tag"
-            skopeo copy "docker://docker.io/$line" "docker://$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$image_name_tag" --src-tls-verify=false --dest-tls-verify=false --authfile=${XDG_RUNTIME_DIR}/containers/auth.json
+            #skopeo copy "docker://docker.io/$line" "docker://$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$image_name_tag" --src-tls-verify=false --dest-tls-verify=false --authfile=${XDG_RUNTIME_DIR}/containers/auth.json
+            skopeo sync --src docker --dest docker "docker.io/$line" "$ALIYUN_REGISTRY/$ALIYUN_NAME_SPACE/$image_name_tag"
         done < images2.txt
 
     - name: Build and push image Aliyun
