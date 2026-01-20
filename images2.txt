@@ -10,5 +10,5 @@
 #ubuntu:24.04
 #xuxueli/xxl-job-admin:3.1.1
 #openeuler/bisheng-jdk:17.0.10-oe2203sp3
-zookeeper:3.8.4
-
+#zookeeper:3.8.4
+rabbitmq:4.2.2
