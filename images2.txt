@@ -12,4 +12,8 @@
 #openeuler/bisheng-jdk:17.0.10-oe2203sp3
 #zookeeper:3.8.4
 #rabbitmq:4.2.2
-rabbitmq:4-management
+#rabbitmq:4-management
+golang:1.25.6
+
+
+
