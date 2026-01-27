@@ -13,7 +13,8 @@
 #zookeeper:3.8.4
 #rabbitmq:4.2.2
 #rabbitmq:4-management
-golang:1.25.6-alpine3.23
+#golang:1.25.6-alpine3.23
+apache/dubbo-admin:0.6.0
 
 
 
